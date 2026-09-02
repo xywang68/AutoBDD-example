@@ -1,3 +1,10 @@
+# export dynamic env for docker-compose (not shell-substitutable in .env)
+export USER ?= $(shell whoami)
+export HOSTOS ?= $(shell uname -s)
+export USERID ?= $(shell id -u)
+export GROUPID ?= $(shell id -g)
+export PASSWORD ?= ubuntu
+
 demo-up:
 	cd demo-app && \
 	npm install && \
