@@ -3,10 +3,11 @@
 ```
 mkdir -p ~/Projects; cd ~/Projects; \
 git clone https://github.com/xyteam/AutoBDD-example.git; \
-cd ~/Projects/AutoBDD-example/.docker
-docker-compose run --rm test-run "--movie 1 --argstring '--tags @Demo'"
+cd ~/Projects/AutoBDD-example
+export USER=$(whoami) HOSTOS=$(uname -s) USERID=$(id -u) GROUPID=$(id -g)
+docker-compose run --rm autobdd-example-run "make e2e-test"
 ```
-Open the HTML BDD test report in ~/Projects/AutoBDD-example/e2e-report/
+Open the searchable cucumber HTML report under test-results/AutoBDD-example_*GMT/index.html
 
 ## AutoBDD-example
 
@@ -32,31 +33,35 @@ The test project will download the two AutoBDD docker images automatically, and 
 
 * **xyteam/autobdd-dev**: For developing and debugging your test project with shell and GUI.
 
-### To run example test in 3 simple steps:
+### To run the full test (requires docker)
 
-To run test you only need a docker supporting headless host somewhere on the network.
+`make e2e-test` starts the local demo-app and the self-hosted mock servers
+(`mock-app/`, see `mock-server.js`), then runs the whole suite (all e2e-test
+modules) via the AutoBDD auto-runner.
 
-#### Step 1: Checkout the AutoBDD-example project:
 ```
-mkdir -p ~/Projects; cd ~/Projects; \
-git clone https://github.com/xyteam/AutoBDD-example.git;
-```
-#### Step 2: Run test:
-```
-cd AutoBDD-example/.docker; \
-# to run test cases with @Demo tag
-docker-compose run --rm test-run "--movie 1 --argstring '--tags @Demo'"
-```
-Options can be appended with quotes to the run command above.
-```
-"--help"
-"--modulelist test-download test-postman --movie 1 --reportbase /some/folder --reportpath someName --argstring '--tags @Demo,@SmokeTest --tags ~@wip'"
+cd ~/Projects/AutoBDD-example
+export USER=$(whoami) HOSTOS=$(uname -s) USERID=$(id -u) GROUPID=$(id -g)
+docker-compose run --rm autobdd-example-run "make e2e-test"
 ```
 
-#### Step 3: Review test report
+#### Run the full test with movie recording enabled
+Add `--movie 1` to the auto-runner call so every scenario records a movie:
 
-A folder named **e2e-report** will be created under the test project.
-Each run creates a timestamped folder with a HTML report and all the run log as well as screenshots and movie.
+```
+cd ~/Projects/AutoBDD-example
+export USER=$(whoami) HOSTOS=$(uname -s) USERID=$(id -u) GROUPID=$(id -g)
+docker-compose run --rm autobdd-example-run \
+  'make demo-up && make mock-up && cd e2e-test && auto-runner.py --project AutoBDD-example --movie 1 --rerunfailed=1 -- --cucumberOpts.tags="not @pending"'
+```
+
+Recorded movies are written under `e2e-test/test-*/Passed_Linux_CH_*.mp4` (one per scenario).
+
+#### Review the test report
+
+Results land in `test-results/` under a timestamped folder, e.g.
+`test-results/AutoBDD-example_<timestamp>GMT/index.html` (a searchable cucumber
+HTML report). Open it in a browser, or serve the folder over http.
 
 ### Special Mentions
   * Demo-App application and Precanned Cucumber-JS Steps are taken from **[webdriverio/cucumber-boilerplate](https://github.com/webdriverio/cucumber-boilerplate)**
