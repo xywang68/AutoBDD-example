@@ -2,7 +2,6 @@
 @Postman
 @Demo
 @SmokeTest
-@external
 Feature: postman collection
 
   As a QA Engineer

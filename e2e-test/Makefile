@@ -1,9 +1,8 @@
 clean:
 	rm -rf test-*/*.json test-*/*.png test-*/*.mp4 test-*/logs
 
-# @external/@pending features are excluded so the default run is deterministic:
-#   * @external features hit live third-party sites/APIs that drift (run on demand
-#     with: --tags @external)
-#   * @pending scenarios are intentionally-undefined step demos
+# External-service demo features are now self-hosted against mock-app (see
+# mock-server.js), so only @pending scenarios (intentionally-undefined step
+# demos) are excluded from the default run.
 test:
-	auto-runner.py --project ${ABDD_PROJECT} --rerunfailed=1 -- --cucumberOpts.tags='not @external and not @pending'
+	auto-runner.py --project ${ABDD_PROJECT} --rerunfailed=1 -- --cucumberOpts.tags='not @pending'
