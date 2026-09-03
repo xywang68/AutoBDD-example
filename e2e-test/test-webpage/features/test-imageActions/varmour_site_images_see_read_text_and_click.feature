@@ -1,5 +1,6 @@
 @test-webpage
 @Demo
+@external
 Feature: vArmour site screen text and see and click image
 
   As a QA Engineer

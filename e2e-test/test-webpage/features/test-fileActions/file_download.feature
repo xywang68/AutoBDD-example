@@ -1,4 +1,5 @@
 @test-download
+@external
 Feature: File download and validation
 
   As a QA Engineer

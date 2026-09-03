@@ -1,5 +1,6 @@
 @test-webpage
 @Demo
+@external
 Feature: bestvpn site - drag and drop image
 
   As a QA Engineer

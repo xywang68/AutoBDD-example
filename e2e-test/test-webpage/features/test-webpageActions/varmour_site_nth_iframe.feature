@@ -1,5 +1,6 @@
 @test-webpage
 @Demo
+@external
 Feature: vArmour site nth iframe validation and action
 
   As a QA Engineer
