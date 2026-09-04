@@ -33,6 +33,13 @@ The test project will download the two AutoBDD docker images automatically, and 
 
 * **xyteam/autobdd-dev**: For developing and debugging your test project with shell and GUI.
 
+> **Version sync (v3.0.0):** The four repos in this project set are aligned on
+> **3.0.0** — AutoBDD (the framework, `package.json` + docker image tag
+> `xyteam/autobdd:3.0.0`), AutoBDD-example, autobdd-test, and xySikulixApi — and
+> are verified to work together on that version. `.env`'s `AutoBDD_Ver=3.0.0`
+> selects the matching image. This 3.0.0 set is the base going forward; a future
+> effort consolidates the repos and upgrades dependencies together.
+
 ### To run the full test (requires docker)
 
 `make e2e-test` starts the local demo-app and the self-hosted mock servers
