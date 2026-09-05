@@ -70,5 +70,9 @@ Results land in `test-results/` under a timestamped folder, e.g.
 `test-results/AutoBDD-example_<timestamp>GMT/index.html` (a searchable cucumber
 HTML report). Open it in a browser, or serve the folder over http.
 
+A sample green-run report output per e2e-test project (one passing scenario each,
+as a text preview of what the HTML report shows) is available as a gist:
+https://gist.github.com/xywang68/50431da8183bebe56aefecea5fd9efeb
+
 ### Special Mentions
   * Demo-App application and Precanned Cucumber-JS Steps are taken from **[webdriverio/cucumber-boilerplate](https://github.com/webdriverio/cucumber-boilerplate)**
